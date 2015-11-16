@@ -16,9 +16,10 @@ public enum Outcome
 
 namespace NumberGuessingGame.Models
 {
+    /*Instanser av strukturen GuessedNumber används för att lagra information om genomförda gissningar.*/
     public struct GuessedNumber
     {
-        public int? Number;
-        public Outcome Outcome;
+        public int? Number; //Publikt fält av typen int? som innehåller en gissnings värde.
+        public Outcome Outcome; //Publikt fält av typen Outcome som innehåller utfallet av en gissning.
     }
 }

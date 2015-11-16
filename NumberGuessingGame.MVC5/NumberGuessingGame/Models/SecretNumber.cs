@@ -9,15 +9,15 @@ namespace NumberGuessingGame.Models
     {
         public const int MaxNumberOfGuesses = 7;
 
-        private int? _number;
-        private List<GuessedNumber> _guessedNumbers;
-        private GuessedNumber _lastGuessedNumber;
+        private int? _number; //Det slumpade talet
+        private List<GuessedNumber> _guessedNumbers; //Lista med alla gissade nummer
+        private GuessedNumber _lastGuessedNumber; //Innehåller det senaste gissade numret
 
         public bool CanMakeGuess
         {
             get
             {
-                if(Count >= MaxNumberOfGuesses || LastGuessedNumber.Outcome == Outcome.Right || _lastGuessedNumber.Outcome == Outcome.NoMoreGuesses)
+                if(Count >= MaxNumberOfGuesses || LastGuessedNumber.Outcome == Outcome.Right || LastGuessedNumber.Outcome == Outcome.NoMoreGuesses)
                 {
                     return false;
                 }
@@ -28,6 +28,7 @@ namespace NumberGuessingGame.Models
             }
         }
 
+        //Returnerar antalet gissningar som gjorts
         public int Count
         {
             get
@@ -36,6 +37,7 @@ namespace NumberGuessingGame.Models
             }
         }
 
+        //Lista som innehåller alla gissade nummer 
         public IList<GuessedNumber> GuessedNumbers
         {
             get
@@ -52,6 +54,7 @@ namespace NumberGuessingGame.Models
             }
         }
 
+        //Returnerar bara det slumpade talet om antalet gissningar tagit slut
         public int? Number
         {
             get
@@ -78,9 +81,11 @@ namespace NumberGuessingGame.Models
             }
         }
 
+        //Konstruktorn
         public SecretNumber()
         {
-            _guessedNumbers = new List<GuessedNumber>;
+            _guessedNumbers = new List<GuessedNumber>(MaxNumberOfGuesses);
+            Initialize();
             
         }
 
@@ -93,6 +98,7 @@ namespace NumberGuessingGame.Models
             _number = random.Next(1, 100);
         }
 
+        //Sätter och returnerar Outcome på det gisade talet. Om talet inte tillhör kategorierna NoMoreGuesses eller Oldguess så läggs de till i _guessedNumber listan.
         public Outcome MakeGuess(int guess)
         {
             if (guess < 1 || guess > 100)
@@ -114,7 +120,7 @@ namespace NumberGuessingGame.Models
             
              _lastGuessedNumber.Number = guess;
             
-            if (guess > _number)
+            if (guess == _number)
             {
                 _lastGuessedNumber.Outcome = Outcome.Right;
             }
