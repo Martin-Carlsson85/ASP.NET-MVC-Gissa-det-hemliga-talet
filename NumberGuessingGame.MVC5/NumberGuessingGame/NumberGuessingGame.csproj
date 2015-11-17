@@ -165,6 +165,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Guess\Error.cshtml" />
     <Content Include="Views\Guess\Index.cshtml" />
+    <Content Include="Views\Guess\OutOfTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

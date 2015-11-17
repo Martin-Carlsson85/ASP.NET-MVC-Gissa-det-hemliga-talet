@@ -14,6 +14,13 @@ namespace NumberGuessingGame.Controllers
 
         //
         // GET: /Guess/
+       
+        public ActionResult OutOfTime()
+        {
+            return View("OutOfTime");
+        }
+        
+        
         public ActionResult Index()
         {
             if (Session.IsNewSession)
@@ -34,7 +41,7 @@ namespace NumberGuessingGame.Controllers
                 }
                 else
                 {
-                    return View("Error", string.Empty, "Sessionen är felaktig");
+                    return OutOfTime();
                 }
             }
             var viewModel = new ViewModel
@@ -71,7 +78,7 @@ namespace NumberGuessingGame.Controllers
                                 viewModel.Status = _secretNumber.LastGuessedNumber.Number + " är för lågt";
                                 break;
                             case Outcome.OldGuess:
-                                viewModel.Status = "Du har redan gissat på talet " + _secretNumber.LastGuessedNumber.Number;
+                                viewModel.Status = "Du har redan gissat på detta talet ";
                                 break;
                             case Outcome.Right:
                                 viewModel.Status = "Grattis, du klarade det på " + _secretNumber.Count + " försök!";
@@ -91,7 +98,7 @@ namespace NumberGuessingGame.Controllers
             }
             catch (Exception e)
             {
-                return View("Error", string.Empty, e.Message);
+                return View("OutOfTime");
             }
         }
 
@@ -108,7 +115,7 @@ namespace NumberGuessingGame.Controllers
             }
             else
             {
-                return View("Error", String.Empty, "Sessionen är felaktig");
+                return View("OutOfTime");
             }
         }
     }
